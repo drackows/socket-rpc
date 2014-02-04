@@ -24,7 +24,7 @@ public class SimpleCallTest {
 	private static MockService service;
 	private static SocketRpcClient socketRpcClient;
 	
-	final int threads = 3000;
+	final int threads = 50;
 	final int executeInOneThread = 20;
 	
 	@BeforeClass

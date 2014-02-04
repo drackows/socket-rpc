@@ -56,7 +56,11 @@ public class SocketRpcServer {
 						MethodCaller callMethod = new MethodCaller(SocketRpcServer.this, socket);
 						methodConcurrentThreads.execute(callMethod);
 					} catch (IOException e) {
-						logger.error("Could not accept client", e);
+						if (running) { 
+							logger.error("Could not accept client", e);
+						} else {
+							logger.info("Server stopped while waiting for connection.");
+						}
 					}
 				}
 			}
