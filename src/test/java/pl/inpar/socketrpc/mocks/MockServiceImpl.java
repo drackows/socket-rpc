@@ -21,6 +21,11 @@ public class MockServiceImpl implements MockService {
 		logger.info("getting value: "+value);
 		return value.intValue();
     }
+
+	@Override
+    public void intAsArg(int i) {
+	    logger.info("call with arg value: "+i);
+    }
 	
 	
 	

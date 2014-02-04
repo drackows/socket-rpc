@@ -31,7 +31,7 @@ public class SocketRpcClient {
 		
 		@Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-			RequestMethod request = new RequestMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes(), (Serializable[]) args);
+			RequestMethod request = new RequestMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes(), args);
 			Socket socket = null;
 			ObjectOutputStream output = null;
 			ObjectInputStream input = null;

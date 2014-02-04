@@ -10,16 +10,16 @@ public class RequestMethod implements Serializable{
 	private Class<?> clazz;
 	private String name;
 	private Class<?>[] types;
-	private Serializable[] args;
+	private Object[] args;
 
-	public RequestMethod(Class<?> clazz, String name, Class<?>[] types, Serializable[] args) {
+	public RequestMethod(Class<?> clazz, String name, Class<?>[] types, Object[] args2) {
 		this.clazz = clazz;
 		this.name = name;
 		this.types = types;
-		this.args = args;
+		this.args = args2;
 	}
 
-	public RequestMethod(Class<?> clazz, String name, Serializable[] args) {
+	public RequestMethod(Class<?> clazz, String name, Object[] args) {
 		this.clazz = clazz;
 		this.name = name;
 		this.types = new Class<?>[0];
@@ -64,11 +64,11 @@ public class RequestMethod implements Serializable{
 		this.types = types;
 	}
 
-	public Serializable[] getArgs() {
+	public Object[] getArgs() {
 		return args;
 	}
 
-	public void setArgs(Serializable[] args) {
+	public void setArgs(Object[] args) {
 		this.args = args;
 	}
 
