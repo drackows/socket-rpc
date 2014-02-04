@@ -4,6 +4,8 @@ import pl.inpar.socketrpc.mocks.MockService;
 import pl.inpar.socketrpc.mocks.MockServiceImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import org.junit.AfterClass;
@@ -38,6 +40,14 @@ public class TestDifferentMethods {
 		MockService service = socketRpcClient.getService(MockService.class);
 		
 		service.intAsArg(1234);
+		
+	}
+	
+	@Test
+	public void testGenericArg() {
+		MockService service = socketRpcClient.getService(MockService.class);
+		
+		System.out.println("got: "+service.stringify(Arrays.asList(123, 456, 789)));
 		
 	}
 	

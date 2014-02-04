@@ -1,5 +1,6 @@
 package pl.inpar.socketrpc.mocks;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -25,6 +26,11 @@ public class MockServiceImpl implements MockService {
 	@Override
     public void intAsArg(int i) {
 	    logger.info("call with arg value: "+i);
+    }
+
+	@Override
+    public String stringify(List<Integer> ints) {
+	    return ints.toString();
     }
 	
 	
