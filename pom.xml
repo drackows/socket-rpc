@@ -1,12 +1,40 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>pl.inpar</groupId>
 	<artifactId>socket-rpc</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
+
 	<name>socket-rpc</name>
 	<url>http://maven.apache.org</url>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus-repo</id>
+			<url>http://nexus.citygrapher.eu/content/repositories/releases
+			</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-repo</id>
+			<url>http://nexus.citygrapher.eu/content/repositories/snapshots
+			</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>nexus-repo</id>
+			<url>http://nexus.citygrapher.eu/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<dependencies>
 
@@ -33,7 +61,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		
+
 		<!-- test scope -->
 		<dependency>
 			<groupId>junit</groupId>
