@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 public class SocketRpcServer {
 	public static final Logger logger = LoggerFactory.getLogger(SocketRpcServer.class);
 	
-	boolean running = false;
-	ExecutorService serverThread = Executors.newSingleThreadExecutor();
-	ExecutorService methodConcurrentThreads = Executors.newFixedThreadPool(5);
-	Map<Class<?>, Object> registeredServices = new ConcurrentHashMap<Class<?>, Object>();
+	private boolean running = false;
+	private final ExecutorService serverThread = Executors.newSingleThreadExecutor();
+	private final ExecutorService methodConcurrentThreads = Executors.newFixedThreadPool(5);
+	private final Map<Class<?>, Object> registeredServices = new ConcurrentHashMap<Class<?>, Object>();
 	
-	ServerSocket serverSocket;
+	private ServerSocket serverSocket;
 	
 	public SocketRpcServer(int port) throws IOException {
 
@@ -53,7 +53,7 @@ public class SocketRpcServer {
 					try {
 						socket = serverSocket.accept();
 						logger.debug("Accepted client socket.getInetAddress():"+socket.getInetAddress());
-						MethodCaller callMethod = new MethodCaller(SocketRpcServer.this, socket);
+						MethodExecutor callMethod = new MethodExecutor(SocketRpcServer.this, socket);
 						methodConcurrentThreads.execute(callMethod);
 					} catch (IOException e) {
 						if (running) { 

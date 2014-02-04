@@ -2,7 +2,7 @@ package pl.inpar.socketrpc.mocks;
 
 import java.util.List;
 
-public interface MockService {
+public interface SampleService {
 	
 	void doStuff();
 	int getValue();

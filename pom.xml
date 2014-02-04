@@ -4,7 +4,7 @@
 	<groupId>pl.inpar</groupId>
 	<artifactId>socket-rpc</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>socket-rpc</name>
 	<url>http://maven.apache.org</url>
 

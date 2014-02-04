@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class RequestMethod implements Serializable{
+	public static final Logger logger = LoggerFactory.getLogger(RequestMethod.class);
 	private static final long serialVersionUID = 1L;
 
-	private Class<?> clazz;
-	private String name;
-	private Class<?>[] types;
-	private Object[] args;
+	private final Class<?> clazz;
+	private final String name;
+	private final Class<?>[] types;
+	private final Object[] args;
 
 	public RequestMethod(Class<?> clazz, String name, Class<?>[] types, Object[] args2) {
 		this.clazz = clazz;
@@ -44,32 +48,16 @@ public class RequestMethod implements Serializable{
 		return clazz;
 	}
 
-	public void setClazz(Class<?> clazz) {
-		this.clazz = clazz;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Class<?>[] getTypes() {
 		return types;
 	}
 
-	public void setTypes(Class<?>[] types) {
-		this.types = types;
-	}
-
 	public Object[] getArgs() {
 		return args;
-	}
-
-	public void setArgs(Object[] args) {
-		this.args = args;
 	}
 
 }

@@ -6,8 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MockServiceImpl implements MockService {
-	Logger logger = LoggerFactory.getLogger(MockServiceImpl.class);
+public class SampleServiceImpl implements SampleService {
+	Logger logger = LoggerFactory.getLogger(SampleServiceImpl.class);
 	
 	AtomicInteger value=new AtomicInteger();
 	

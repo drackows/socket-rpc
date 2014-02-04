@@ -8,13 +8,13 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MethodCaller implements Runnable {
-	public static final Logger logger = LoggerFactory.getLogger(MethodCaller.class);
+public class MethodExecutor implements Runnable {
+	public static final Logger logger = LoggerFactory.getLogger(MethodExecutor.class);
 	
-	private SocketRpcServer server;
-	private Socket socket;
+	private final SocketRpcServer server;
+	private final Socket socket;
 
-	public MethodCaller(SocketRpcServer server, Socket socket) {
+	public MethodExecutor(SocketRpcServer server, Socket socket) {
 		this.server = server;
 		this.socket = socket;
 	}
