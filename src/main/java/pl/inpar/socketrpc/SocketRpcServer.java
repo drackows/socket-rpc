@@ -17,14 +17,18 @@ public class SocketRpcServer {
 	
 	private boolean running = false;
 	private final ExecutorService serverThread = Executors.newSingleThreadExecutor();
-	private final ExecutorService methodConcurrentThreads = Executors.newFixedThreadPool(5);
+	private final ExecutorService methodConcurrentThreads;
 	private final Map<Class<?>, Object> registeredServices = new ConcurrentHashMap<Class<?>, Object>();
 	
 	private ServerSocket serverSocket;
 	
 	public SocketRpcServer(int port) throws IOException {
-
+		this(port, 10);
+	}
+	
+	public SocketRpcServer(int port, int threadPoolSize) throws IOException {
 		logger.info("Server starting");
+		methodConcurrentThreads = Executors.newFixedThreadPool(threadPoolSize);
 		serverSocket = new ServerSocket(port);
 		serverThread.execute(mainRunnable());
 		logger.info("Listening for methods");
