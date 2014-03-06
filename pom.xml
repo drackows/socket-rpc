@@ -9,7 +9,7 @@
 
 	<name>socket-rpc</name>
 	<url>http://maven.apache.org</url>
-
+  
 	<distributionManagement>
 		<repository>
 			<id>nexus-repo</id>
