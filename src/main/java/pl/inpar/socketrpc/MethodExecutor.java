@@ -1,5 +1,7 @@
 package pl.inpar.socketrpc;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -24,7 +26,7 @@ public class MethodExecutor implements Runnable {
 		ObjectInputStream input = null;
 		ObjectOutputStream output = null;
 		try {
-	        input = new ObjectInputStream(socket.getInputStream());
+			input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 	        
 	        Object readed = input.readObject();
 	        if (readed instanceof RequestMethod) {
@@ -33,8 +35,9 @@ public class MethodExecutor implements Runnable {
 	        	Object service = server.getService(method.getClazz());
 	        	Object result = method.invoke(service);
 	        	
-	        	output = new ObjectOutputStream(socket.getOutputStream());
+				output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 	        	output.writeObject(result);
+				output.flush();
 	        	
 	        }
         } catch (IOException | ClassNotFoundException e) {

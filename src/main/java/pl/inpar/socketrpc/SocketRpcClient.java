@@ -1,5 +1,7 @@
 package pl.inpar.socketrpc;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationHandler;
@@ -34,10 +36,10 @@ public class SocketRpcClient {
 				try {
 	    			socket = new Socket(host, port);
 	    			
-	    			output = new ObjectOutputStream(socket.getOutputStream());
+					output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 	    			output.writeObject(request);
-
-	    			input = new ObjectInputStream(socket.getInputStream());
+					output.flush();
+					input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
 	    			result = input.readObject();
 				} finally {
 					input.close();
