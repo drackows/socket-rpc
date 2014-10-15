@@ -60,7 +60,6 @@ public class SimpleCallTest {
 		long startTime = System.currentTimeMillis();
 		for (int i=0; i<threads; i++) {
     		executor.execute(new Runnable() {
-    			@Override
     			public void run() {
     				for (int i=0; i<executeInOneThread; i++) {
     		    		service.doStuff();

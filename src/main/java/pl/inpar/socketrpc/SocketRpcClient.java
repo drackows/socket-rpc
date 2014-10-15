@@ -14,41 +14,51 @@ import org.slf4j.LoggerFactory;
 
 public class SocketRpcClient {
 	public static final Logger logger = LoggerFactory.getLogger(SocketRpcClient.class);
-	
+
 	private final String host;
 	private final int port;
 
 	public SocketRpcClient(String host, int port) {
 		this.host = host;
 		this.port = port;
-    }
+	}
 
 	@SuppressWarnings("unchecked")
-    public <T> T getRemoteService(Class<T> clazz) {
-		return (T)Proxy.newProxyInstance(clazz.getClassLoader(), new Class[] {clazz}, new InvocationHandler(){
+	public <T> T getRemoteService(Class<T> clazz) {
+		return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[] { clazz }, new InvocationHandler() {
 			@Override
-	        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 				RequestMethod request = new RequestMethod(method.getDeclaringClass(), method.getName(), method.getParameterTypes(), args);
 				Socket socket = null;
 				ObjectOutputStream output = null;
 				ObjectInputStream input = null;
 				Object result = null;
 				try {
-	    			socket = new Socket(host, port);
-	    			
+					socket = new Socket(host, port);
+
 					output = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-	    			output.writeObject(request);
+					output.writeObject(request);
 					output.flush();
-					input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
-	    			result = input.readObject();
+					try {
+						input = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+					} catch(NullPointerException ex) {
+						logger.error("Error while connecting to : "+host+":"+port);
+					}
+					result = input.readObject();
 				} finally {
-					input.close();
-					output.close();
-					socket.close();
+					if (input!=null) {
+						input.close();
+					}
+					if (output!=null) {
+						output.close();
+					}
+					if (socket!=null) { 
+						socket.close();
+					}
 				}
-		        return result;
-	        }
+				return result;
+			}
 		});
-    }
-	
+	}
+
 }

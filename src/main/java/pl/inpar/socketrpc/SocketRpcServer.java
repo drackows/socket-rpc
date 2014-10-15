@@ -49,7 +49,6 @@ public class SocketRpcServer {
 	
 	private Runnable mainRunnable() {
 	    return new Runnable() {
-			@Override
 			public void run() {
 				running = true;
 				while (running) {
